@@ -7,7 +7,7 @@ class NegociacaoController {
         this._inputData = $("#data");
         this._inputQuantidade = $("#quantidade");
         this._inputValor = $("#valor");
-
+        this._listaNegociacoes = new ListaNegociacoes();
     }
 
     _limpar() {
@@ -18,26 +18,27 @@ class NegociacaoController {
         this._inputValor.value = 0.0;
     }
 
+    _criaNegociacao() {
+
+        this._listaNegociacoes.adiciona(
+            new Negociacoes(
+                DateHelper.textoParaData(this._inputData.value),
+                this._inputQuantidade.value,
+                this._inputValor.value
+            )
+        );
+    }
+
     adicionar(event) {
-        event.preventDefault();
-        let data = new Date ( 
-            ...this._inputData.value
-            .split("-")
-            .map((item, indice) => item - indice % 2)
-        );
+        event.preventDefault();     
 
+        this._criaNegociacao();
 
-
-        let negociacao = new Negociacoes(
-            data,
-            this._inputQuantidade.value,
-            this._inputValor.value
-        );
-
-        console.log(negociacao);
+        //exibe vetor com todas negociacoes
+        console.log(this._listaNegociacoes.listaNegociacoes);
         
+        //limpa formulario e foca no campo data
         this._limpar();
-
     }
     
 }
