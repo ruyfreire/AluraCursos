@@ -2,7 +2,7 @@ class Codigo {
 
     constructor() {
 
-        throw new Error("Classe não pode ser instanciada, use seus métodos estaticos");
+        throw new Error("Classe não pode ser instanciada, use seus métodos estáticos");
     }
 
     static validaCodigo(codigo) {
