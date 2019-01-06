@@ -1,0 +1,66 @@
+/*=================== MENU DO JOGO ========================*/
+
+/*menu com imagens e botao do jogo*/
+#menu {
+	margin: 1em auto;
+	text-align: center;
+}
+
+/*botao de play do jogo*/
+#botao-iniciar {
+	margin: .2em;
+	width: 60px;
+}
+
+/*imagem e input de cada jogador*/
+#menu div, #menu div img {
+	display: block;
+	margin: 0 auto;
+	width: 80px;
+}
+
+/*input dos jogadores*/
+#menu input {
+	box-sizing: border-box;
+	width: 100%;	
+	padding: .2em; margin: .2em 0;
+	border-radius: 10px;
+	text-align: center;
+}
+
+@media (min-width: 360px){
+/*imagem e input de cada jogador*/
+	#menu div, #menu div img {
+		display: inline-block;
+		width: 100px;
+	}
+
+	#botao-iniciar {
+		margin: .5em;
+		width: 60px;
+	}
+}
+@media (min-height: 500px) and (min-width: 360px){
+	h1 {
+		font-size: 1em;
+		margin: .5em 0;
+	}
+}
+@media (min-height: 500px) and (min-width: 600px){
+	h1 {
+		font-size: 1.5em;
+		margin: .5em 0;
+	}
+}
+@media (min-width: 600px){
+	#menu div, #menu div img {
+		display: inline-block;
+		margin: 0 auto;
+		width: 150px;
+	}
+
+	#botao-iniciar {
+		margin: 1em;
+		width: 80px;
+	}
+}

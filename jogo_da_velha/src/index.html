@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Jogo da velha</title>
+		<link rel="icon" href="imagens/icon.png">
+		<meta name="viewport" content="width=device-width">		
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link inline rel="stylesheet" href="css/geral.css">
+		<link inline rel="stylesheet" href="css/menu.css">
+		<link rel="stylesheet" href="css/tabuleiro.css">
+
+	</head>
+
+	<body>
+		<h1>Jogo da velha</h1>
+
+		<div id="menu" class="">
+		<fieldset>
+			
+			<div><!-- Jodaor 1 -->
+				<img src="imagens/jogador_1.png" alt="Imagem jogador 1">
+				<input id="nome-jogador-1"	type="text" maxlength="10" placeholder="Jogador 1" autofocus>
+			</div>
+			
+			<!-- Botão de iniciar jogo -->
+			<img src="imagens/iniciar.png" alt="Botão iniciar" id="botao-iniciar"></i>
+			<div><!-- Jogador 2 -->
+				<img src="imagens/jogador_2.png" alt="Imagem jogador 2">
+				<input id="nome-jogador-2" type="text" maxlength="10" placeholder="Jogador 2">
+			</div>
+		</fieldset>
+		</div>
+
+		<div id="palco-jogo" class="invisivel">
+			<img class="invisivel" src="imagens/marcacao_1.png" alt="Marcação para o tabuleiro">
+			<img class="invisivel" src="imagens/marcacao_2.png" alt="Marcação para o tabuleiro">
+
+
+			<div id="jogador-1"><!-- jogador 1 -->
+				<img src="imagens/jogador_1.png">
+				<span></span>
+			</div>
+
+			<table>
+				<tbody>
+					<tr><td data-ponto="0"></td>	<td data-ponto="0"></td>	<td data-ponto="0"></td></tr>
+					<tr><td data-ponto="0"></td>	<td data-ponto="0"></td>	<td data-ponto="0"></td></tr>
+					<tr><td data-ponto="0"></td>	<td data-ponto="0"></td>	<td data-ponto="0"></td></tr>
+				</tbody>
+			</table>
+
+			<div id="jogador-2"><!-- jogador 2 -->
+				<img class="jogador-esperando" src="imagens/jogador_2.png">
+				<span></span>
+			</div>	
+		</div>
+
+		<div class="final">
+			<h2 class="invisivel" id="resultado"></h2>
+			<button class="invisivel" id="reiniciar-jogo">Reiniciar</button>
+		</div>
+	</body>
+
+	<script src="js/jogo.js"></script>
+</html>
