@@ -1,0 +1,13 @@
+runtime: php55
+api_version: 1
+
+handlers:
+- url: /
+  static_files: index.html
+  upload: index.html
+  http_headers:
+    Link: <css/reset.css>; rel=preload; as=style, <css/tabuleiro.css>; rel=preload; as=style
+
+- url: /(.*)
+  static_files: \1
+  upload: (.*)

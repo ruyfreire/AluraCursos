@@ -1,0 +1,33 @@
+/*======================== GERAL ==========================*/
+html {
+	height: 100%;
+	text-align: center;
+}
+html:before {
+	content: "";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+body {
+	display: inline-block;
+	vertical-align: middle;
+	width: 80%; 
+	padding: .5em;
+	border-radius: 10px;
+	box-shadow: 0 0 15px #CCC;
+}
+
+/*titulo do jogo*/
+h1 {
+	font-size: 1em;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+	margin: .2em 0;
+	border-bottom: 1px solid #CCC;
+}
+
+.invisivel {
+	display: none;
+}
