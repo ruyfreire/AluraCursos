@@ -1,0 +1,374 @@
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    -webkit-perspective: 6px;
+    -moz-perspective: 6px;
+    perspective: 6px;
+    -webkit-perspective-origin: 50% 160px;
+    -moz-perspective-origin: 50% 160px;
+    perspective-origin: 50% 160px;
+}
+
+.foto-home {
+    height: 200px;
+    border-radius: 50%;
+}   
+   
+.banner-twitter {
+    font-family: "Open Sans Condensed", sans-serif;
+    text-transform: none;
+    font-size: 1em;
+    background-color: #3C1D3D;
+    color: #FFF;
+    text-decoration: none;
+    border: .25em solid black;
+    width: 30ch;
+    padding: .5em;
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    right: 0; top: 0;
+    transform-origin: 0 0;
+    transform: translate(calc(.707 * (3.5em - 100%) + 100%), calc(-.707 * 3.5em)) rotate(45deg);
+    -webkit-animation: banner .5s;
+    animation: banner .5s;
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+    animation-fill-mode: backwards;
+}
+@keyframes banner {
+    0%{
+        opacity: 0;
+        transform: scale(0.005);
+    }
+}
+@-webkit-keyframes banner {
+    from{
+        opacity: 0;
+        transform: scale(0.005);
+    }
+}
+
+.titulo-principal {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.palavras-3d {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.palavra-home {
+    font-size: 400%;
+    font-family: "Shadows Into Light", cursive;
+    font-weight: bold;
+    color: #D5447E;
+    position: absolute;
+    -webkit-animation: palavras 2s;
+    animation: palavras 2s;
+}
+@-webkit-keyframes palavras{
+    0%{
+        opacity: 0;
+        transform: scale(0.005);
+    }
+}
+@keyframes palavras{
+    from{
+        opacity: 0;
+        transform: scale(0.005);
+    }
+}
+
+.eficiencia {
+    top: 50%;
+    left: 60%;
+    -webkit-transform: translate(-50%, -50%) translateZ(4px) rotate(-5deg) scale(.25);
+    -moz-transform: translate(-50%, -50%) translateZ(4px) rotate(-5deg) scale(.25);
+    transform: translate(-50%, -50%) translateZ(4px) rotate(-5deg) scale(.25);
+    opacity: 0.9;
+}
+
+.boas-praticas {
+    top: 70%;
+    left: 20%;
+    -webkit-transform: translate(-50%, -50%) translateZ(1px) rotate(10deg) scale(.25);
+    -moz-transform: translate(-50%, -50%) translateZ(1px) rotate(10deg) scale(.25);
+    transform: translate(-50%, -50%) translateZ(1px) rotate(10deg) scale(.25);
+    opacity: 0.4;
+}
+
+.codigo-limpo {
+    top: 45%;
+    left: 25%;
+    -webkit-transform: translate(-50%, -50%) rotate(-10deg) translateZ(2px) scale(0.25);
+    -moz-transform: translate(-50%, -50%) rotate(-10deg) translateZ(2px) scale(0.25);
+    transform: translate(-50%, -50%) rotate(-10deg) translateZ(2px) scale(0.25);
+    opacity: 0.6;
+}
+
+.css3 {
+    top: 55%;
+    left: 35%;
+    -webkit-transform:translate(-50%, -50%) rotate(5deg) translateZ(2px) scale(0.25);
+    -moz-transform:translate(-50%, -50%) rotate(5deg) translateZ(2px) scale(0.25);
+    transform:translate(-50%, -50%) rotate(5deg) translateZ(2px) scale(0.25);
+    opacity: 0.6;
+}
+
+.html5 {
+    top: 30%;
+    left: 65%;
+    -webkit-transform: translate(-50%, -50%) rotate(10deg) translateZ(2px)  scale(0.25);
+    -moz-transform: translate(-50%, -50%) rotate(10deg) translateZ(2px)  scale(0.25);
+    transform: translate(-50%, -50%) rotate(10deg) translateZ(2px)  scale(0.25);
+    opacity: 0.6;
+}
+
+.javascript {
+    top: 15%;
+    left: 60%;
+    -webkit-transform: translate(-50%, -50%) rotate(-10deg) translateZ(1px) scale(0.25);
+    -moz-transform: translate(-50%, -50%) rotate(-10deg) translateZ(1px) scale(0.25);
+    transform: translate(-50%, -50%) rotate(-10deg) translateZ(1px) scale(0.25);
+    opacity: 0.4;
+}
+
+.acessibilidade {
+    top: 30%;
+    left: 35%;
+    -webkit-transform: translate(-50%, -50%) rotate(-10deg) translateZ(3px) scale(0.25);
+    -moz-transform: translate(-50%, -50%) rotate(-10deg) translateZ(3px) scale(0.25);
+    transform: translate(-50%, -50%) rotate(-10deg) translateZ(3px) scale(0.25);
+    opacity: 0.8;
+}
+
+.responsivo {
+    top: 40%;
+    left: 40%;
+    -webkit-transform: translate(-50%, -50%) rotate(10deg) translateZ(3px) scale(0.25);
+    -moz-transform: translate(-50%, -50%) rotate(10deg) translateZ(3px) scale(0.25);
+    transform: translate(-50%, -50%) rotate(10deg) translateZ(3px) scale(0.25);
+    opacity: 0.8;
+}
+
+.otimizacoes {
+    top: 70%;
+    left: 65%;
+    -webkit-transform: translate(-50%, -50%) rotate(-5deg) translateZ(2px) scale(0.25);
+    -moz-transform: translate(-50%, -50%) rotate(-5deg) translateZ(2px) scale(0.25);
+    transform: translate(-50%, -50%) rotate(-5deg) translateZ(2px) scale(0.25);
+    opacity: 0.6;
+}
+
+.agilidade {
+    top: 75%;
+    left: 35%;
+    -webkit-transform: translate(-50%, -50%) rotate(10deg) translateZ(1px) scale(0.25);
+    -moz-transform: translate(-50%, -50%) rotate(10deg) translateZ(1px) scale(0.25);
+    transform: translate(-50%, -50%) rotate(10deg) translateZ(1px) scale(0.25);
+    opacity: 0.4;
+}
+
+.design {
+    top: 40%;
+    left: 60%;
+    -webkit-transform: translate(-50%, -50%) rotate(10deg) translateZ(2px) scale(0.25);
+    -moz-transform: translate(-50%, -50%) rotate(10deg) translateZ(2px) scale(0.25);
+    transform: translate(-50%, -50%) rotate(10deg) translateZ(2px) scale(0.25);
+    opacity: 0.6;
+}
+
+.subtitulo-principal {
+    text-transform: capitalize;
+    font-size: 1rem;
+}
+
+.saudacao p {
+    font-size: 1.5em;
+    color: #99A;
+    line-height: 1;
+    padding: 2em;
+}
+
+.saudacao p:hover em, .saudacao p:focus em {
+    animation-play-state: paused;
+}
+
+.saudacao-inicio {
+    font-size: 3em;
+    color: #889;
+}
+
+.saudacao-ultima-linha {
+    text-align: right;
+    display: block;
+}
+
+.saudacao strong {
+    font-size: 2em;
+    color: #000;
+}
+
+.saudacao em {
+    color: #851944;
+    font-size: 4em;
+    display: inline-block;
+    transform: rotate(-5deg) skewX(-10deg);
+    position: relative;
+    -webkit-animation: quica 1s infinite;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-timing-function: ease-in-out;
+    animation: quica 1s infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes quica {
+    from {
+        top: -.3em;
+    }
+    to {
+        top: 0; 
+    }
+}
+@-webkit-keyframes quica {
+    from {
+        top: -.3em;
+    }
+    to {
+        top: 0; 
+    }
+}
+
+.botao-index {
+    font-size: 1.25em;
+    background-color: #851944;
+    color: #FFF;
+    padding: .5em;
+    border: .2em solid black;
+    width: 40ch;
+    margin: 2em auto;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: text-shadow .5s, background-color .5s;
+}
+
+.botao-index:hover, .botao-index:focus {
+    text-shadow: 0 0 1em #FA9;
+    color: #FFF;
+    background-color: #C54974;
+}
+
+.secao-inicio {
+    padding: 2em;
+}
+
+.secao-inicio h2 {
+    font-size: 3em;
+    text-shadow: 2px 2px #000;
+    text-transform: uppercase;
+    margin-bottom: .5em;
+}
+
+.trabalhos {
+    background-color: #3C1D3D;
+    border-top: .5em solid #000;
+    border-bottom: .5em solid #000;
+    background-image: linear-gradient(135deg, transparent, transparent 14px, rgba(0, 0, 0, 0.1) 14px, rgba(0, 0, 0, 0.1) 15px, transparent 15px, transparent);
+    background-size: 20px 20px;
+    background-attachment: fixed;
+}
+
+.trabalhos h2 {
+    color: #FFF;
+}
+
+.trabalhos ul {
+    overflow: hidden;
+    border: .5em solid black;
+}
+
+.trabalhos li {
+    float: left;
+    width: 33.333%;
+}
+
+.trabalhos img {
+    width: 100%;
+    display: block;
+}
+
+.blog {
+    background-color: #999; 
+    color: #FFF;
+    border-bottom: .5em solid #851944;
+    position: relative;
+    background-image: linear-gradient(45deg, transparent, transparent 14px, rgba(0, 0, 0, 0.1) 14px, rgba(0, 0, 0, 0.1) 15px, transparent 15px, transparent);
+    background-size: 20px 20px;
+    background-attachment: fixed;
+}
+
+.blog small {
+    position: relative;
+    top: -2em;
+}
+
+.blog li a {
+    color: #FCF;
+    padding: .5em;
+    display: block;
+    width: 40ch;
+    width: 30%;
+}
+
+.inicio-post a:hover, .inicio-post a:focus {
+    background-color: #FFF;
+    color: #F26;
+}
+
+.blog .inicio-post p {
+    display: none;
+    background-color: #FFF;
+    position: absolute;
+    color: #000;
+    top: 6em;
+    right: 3em;
+    left: 30%;
+    height: 8em;
+    padding: 1em;
+}
+
+.blog a:hover + p, .blog a:focus + p {
+    display: block;
+}
+
+footer {
+    background-color: #000;
+    color: #FFF;
+    padding: 2em;
+}
+
+footer h2 {
+    font-size: 3em;
+}
+
+footer a {
+    color: #F99;
+}
+
+main {
+    width: 100%;
+    padding-bottom: 0;
+    float: none;
+}

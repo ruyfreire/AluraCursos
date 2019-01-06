@@ -1,0 +1,33 @@
+#sessao-palestrantes {
+	background-color: #ef7247;
+	text-align: center;
+}
+
+#sessao-palestrantes .titulo-sessao,
+#sessao-palestrantes .subtitulo-sessao {
+	color: #FFF;
+}
+
+.palestrante {
+	background-color: #FFF;
+	display: inline-block;
+	vertical-align: middle;
+	width: 32ch;
+	margin: .5em;
+	padding: 1em 0;
+	border-radius: 1em;
+}
+
+.palestrante img {
+	border-radius: 50%;
+}
+
+.palestrante p {
+	display: block;
+	margin: .5em auto 0;
+	width: 90%;
+}
+
+.palestrante span {
+	font-weight: bold;
+}

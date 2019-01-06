@@ -1,0 +1,70 @@
+header {
+	background-image: url(../img/destaque.jpeg);
+	background-size: cover;
+	background-position: center;
+}
+
+#cabecalho ul {
+	text-align: center;
+	padding: 1em;
+}
+
+#cabecalho li {
+	display: inline;
+}
+
+#cabecalho a {
+	background-color: rgba(0,0,0,.1);
+	display: inline-block;
+	padding: 1em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #FFF;
+	border-radius: .3em;
+	transition: background-color .5s;
+}
+
+#cabecalho a:hover, #cabecalho:focus {
+	background-color: #46989D;
+}
+
+#chamada-principal {
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 0;
+}
+
+#chamada-principal h1 {
+	color: #FFF;
+	font-size: 3em;
+}
+
+#chamada-principal h2 {
+	color: #64FF64;
+	font-size: 2.5em;
+	margin-top: .2em;
+}
+
+#chamada-principal h1,
+#chamada-principal h2 {
+	text-shadow: 2px 2px 2px #000;
+}
+
+#chamada-principal a {
+	display: inline-block;
+	background-color: #48a3a6;
+	margin: 1.5em 0 3em;
+	padding: 1.2em 2em;
+	border-radius: .5em;
+	text-decoration: none;
+	font-size: 1em;
+	color: #FFF;
+	box-shadow: 2px 2px 2px #000;
+}
+
+@media (min-width: 768px) {
+	#chamada-principal {
+		font-size: 25px;
+	}
+}

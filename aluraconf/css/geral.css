@@ -1,0 +1,15 @@
+.sessao {
+	padding: 1.5em 2em;
+}
+
+.titulo-sessao {
+	font-size: 2em;
+	margin-bottom: .5em;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.subtitulo-sessao {
+	font-size: 1.5em;
+	margin-bottom: .5em;
+}

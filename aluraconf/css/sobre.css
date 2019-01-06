@@ -1,0 +1,14 @@
+#sessao-sobre {
+	text-align: center;
+	font-size: 18px;
+}
+
+#sessao-sobre p {
+	line-height: 1.5em;
+}
+
+@media (min-width: 768px) {
+	#sessao-sobre {
+		font-size: 22px;
+	}
+}
