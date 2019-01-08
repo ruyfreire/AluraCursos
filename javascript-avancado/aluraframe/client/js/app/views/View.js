@@ -5,7 +5,7 @@ class View {
         this._elemento = elemento;        
     }
 
-    template(modelo) {
+    template() {
 
         throw new Error("Você deve sobrescrever este método em seu template!");
     }

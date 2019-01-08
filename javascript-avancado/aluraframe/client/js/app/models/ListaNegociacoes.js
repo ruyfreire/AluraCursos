@@ -9,9 +9,13 @@ class ListaNegociacoes {
         
         this._listaNegociacoes.push(negociacoes);
     }
-
+    
     get listaNegociacoes() {
-
+        
         return [].concat(this._listaNegociacoes);
+    }
+    
+    esvazia() {
+        this._listaNegociacoes = [];
     }
 }
