@@ -24,7 +24,7 @@ class NegociacoesService {
         return this._http.get('negociacoes/semana')
             .then( negociacoes =>
                 negociacoes.map(n =>
-                    new Negociacoes(new Date(n.data),n.quantidade,n.valor))
+                    new Negociacao(new Date(n.data),n.quantidade,n.valor))
             )
             .catch( () => {
                 throw new Error("Erro ao importar Negociações da Semana!")
@@ -36,7 +36,7 @@ class NegociacoesService {
         return this._http.get('negociacoes/anterior')
             .then( negociacoes =>
                 negociacoes.map(n =>
-                    new Negociacoes(new Date(n.data),n.quantidade,n.valor))
+                    new Negociacao(new Date(n.data),n.quantidade,n.valor))
             )                
             .catch( () => {
                 throw new Error("Erro ao importar Negociações da Semana Anterior!");                    
@@ -48,7 +48,7 @@ class NegociacoesService {
         return this._http.get('negociacoes/retrasada')
             .then( negociacoes =>
                 negociacoes.map(n =>
-                    new Negociacoes(new Date(n.data),n.quantidade,n.valor))
+                    new Negociacao(new Date(n.data),n.quantidade,n.valor))
             )                
             .catch( () => {
                 throw new Error("Erro ao importar Negociações da Semana Retrasada!");                    
