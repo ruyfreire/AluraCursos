@@ -1,4 +1,7 @@
-class NegociacaoController {
+import { Negociacao, Negociacoes } from "../models/index";
+import { NegociacoesView, MensagemView } from "../views/index";
+
+export class NegociacaoController {
 
     private _inputData: JQuery;
     private _inputQuantidade: JQuery;
@@ -20,9 +23,9 @@ class NegociacaoController {
         event.preventDefault();
 
         const negociacao = new Negociacao(
-            new Date(this._inputData.val().replace(/-/g, '/')),
-            parseInt(this._inputQuantidade.val()),
-            parseFloat(this._inputValor.val())
+            new Date(this._inputData.val().toString().replace(/-/g, '/')),
+            parseInt(this._inputQuantidade.val().toString()),
+            parseFloat(this._inputValor.val().toString())
         );
 
         this._negociacoes.adiciona(negociacao);
