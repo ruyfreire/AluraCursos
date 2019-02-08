@@ -50,23 +50,34 @@ export class NegociacaoController {
     }
     
     @throttle()
-    importarDados() {
+    async importarDados() {
         
-        this._service.importarNegociacoes(
-            res => {
-                if(res.ok) return res;
-                else throw new Error(res.statusText);
-        })
-        .then(negociacoes => {
+        try {
 
-            negociacoes.forEach(negociacao => 
-                    this._negociacoes.adiciona(negociacao))
+            const negociacoesParaImportar = await this._service.importarNegociacoes(
+                res => {
+                    if(res.ok) return res;
+                    else throw new Error(res.statusText);
+            })
+    
+            const negociacoesJaImportadas = this._negociacoes.paraArray();
+
+            negociacoesParaImportar.filter(negociacao =>
+                !negociacoesJaImportadas.some(jaImportada =>
+                    negociacao.ehIgual(jaImportada)))
+            
+            .forEach(negociacao => 
+                this._negociacoes.adiciona(negociacao))
 
 
             this._negociacoesView.update(this._negociacoes);
             this._mensagemView.update("Negociações importadas com sucesso");
-        })
-        .catch((err: any) => console.log(err));
+        }
+        catch(err) {
+            this._mensagemView.update(err.message);
+        }
+
+
     }
 
 

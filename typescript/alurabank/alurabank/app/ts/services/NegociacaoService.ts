@@ -10,8 +10,9 @@ export class NegociacaoService {
             .then((dados: NegociacaoParcial[]) => 
                 dados.map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
             )
-            .catch(() => {
-                throw new Error("Erro ao importar as negociações")
+            .catch(err => {
+                console.log(err);
+                throw new Error("Erro ao importar as negociações");
             });
 
     }
