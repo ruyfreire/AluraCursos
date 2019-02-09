@@ -1,5 +1,5 @@
-# AluraCursos
-Pequenas páginas desenvolvidas durante as aulas práticas no alura.
+# Cursos
+Pequenas páginas desenvolvidas durante as aulas práticas em curso, principamente no alura.
 
 
 ## HTML5 & CSS3 [hmtl_css](/html_css)
@@ -22,9 +22,19 @@ Melhores práticas de script, usando JavaScript puro (Vanilla).
 Aplicando os conhecimentos a um único projeto, junto com Jquery v3.2.1
 
 
-## JavaScript - Avançado [javascript-avancado](/javascript-avancado)
+## JavaScript - Avançado [javascript-avancado](/javascript-avancado/aluraframe)
 
-Avançando em script com ECMAScript 6 usando classes e modelo MVC.
+Avançando em script com ECMAScript 6 usando classes e modelo MVC, compilando para ES5 com babel.
+
+
+## Typescript [typescript](/typescript)
+
+Página desenvolvida em typescript, compilado para ECMAScript 6.
+
+
+## Webpack - Módulos [webpack](/webpack)
+
+Single Page utilizando modulos com Webpack e babel.
 
 
 ## Página Responsiva - Media-Queries [responsive](/responsive)
