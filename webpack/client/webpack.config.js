@@ -1,6 +1,6 @@
 const path = require("path");
 const babiliPlugin = require("babili-webpack-plugin");
-const extractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const optimizePlugin = require("optimize-css-assets-webpack-plugin");
 const webpack = require('webpack');
 const htmlWebpackPlugin = require("html-webpack-plugin");
@@ -20,19 +20,14 @@ plugins.push(
     })
 );
 
-plugins.push(new extractTextPlugin("styles.css"));
+plugins.push(new MiniCssExtractPlugin({
+    filename: "styles.css"
+}));
 
 plugins.push(
     new webpack.ProvidePlugin({
         $: 'jquery/dist/jquery.js',
         jQuery: 'jquery/dist/jquery.js'
-    })
-);
-
-plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor', 
-        filename: 'vendor.bundle.js'
     })
 );
 
@@ -60,6 +55,7 @@ if(process.env.NODE_ENV == 'production') {
 plugins.push(new webpack.DefinePlugin({ SERVICE_URL }));
 
 module.exports = {
+    mode: 'development',
     entry: {
         app: './app-src/app.js',
         vendor: ['jquery', 'bootstrap', 'reflect-metadata']
@@ -79,10 +75,12 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: extractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader'
-                })
+                use: [
+                  {
+                    loader: MiniCssExtractPlugin.loader,
+                  },
+                  "css-loader"
+                ]
             },
             { 
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, 
@@ -102,5 +100,16 @@ module.exports = {
             } 
         ]
     },
-    plugins
+    plugins: plugins,
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all'
+                }
+            }
+        }
+    }
 }
