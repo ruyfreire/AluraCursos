@@ -1,20 +1,22 @@
-<h4 class="text-center">Login</h4>
+<div class="container">
 
-<form [formGroup]="loginForm" class="form mt-4">
+    <h4 class="text-center">Login</h4>
+    
+<form [formGroup]="loginForm" class="form mt-4" (submit)="login()">
 
     <div class="form-group">
-        <input
-            formControlName="userName"
+        <input #userNameInput
+        formControlName="userName"
             class="form-control" 
             placeholder="user name" 
             autofocus>
 
         <ap-vmessage
-            *ngIf="loginForm.get('userName').errors?.required"
-            text="Nome de usuário requerido!">
+        *ngIf="loginForm.get('userName').errors?.required"
+        text="Nome de usuário requerido!">
         </ap-vmessage>
     </div>
-
+    
     <div class="form-group">
         <input
             formControlName="password"
@@ -22,12 +24,12 @@
             class="form-control" 
             placeholder="password">   
             
-        <ap-vmessage
+            <ap-vmessage
             *ngIf="loginForm.get('password').errors?.required"
             text="Senha de usuário requerida!">
         </ap-vmessage>
     </div>
-
+    
     <button
         [disabled]="loginForm.invalid"
         type="submit" 
@@ -37,4 +39,6 @@
 
 </form>
 
-<p>Não é usuário? <a>Registre agora</a></p>
+<p>Não é usuário? <a [routerLink]="['signup']">Registre agora</a></p>
+
+</div>

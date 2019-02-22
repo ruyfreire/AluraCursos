@@ -27,6 +27,7 @@ export class PhotoListComponent implements OnInit {
     this.photos = this.activatedRoutes.snapshot.data.photos;
   }
 
+  
   load() {
     this.service.listFromUserPaginated(this.userName, ++this.pageNumber)
       .subscribe( photos => {
