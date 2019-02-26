@@ -3,16 +3,30 @@
 
     <div class="col-md-6 text-center">
 
-      <input
-        formControlName="file"
-        (change)="file = $event.target.files[0]"
-        type="file"
-        accept="image/*">
-      <ap-vmessage
-        *ngIf="photoForm.get('file').errors?.required"
-        text="Foto é requerida!">
-      </ap-vmessage>
+      <div *ngIf="!preview; else previewImage">
+        <button apImmediateClick type="button" (click)="fileInput.click()" class="btn btn-primary">
+          <i class="fa fa-image fa-4x align-middle"></i>
+        </button>
+        <input
+          #fileInput
+          hidden
+          formControlName="file"
+          (change)="handleImage($event.target.files[0])"
+          type="file"
+          accept="image/*">
+        <ap-vmessage
+          *ngIf="photoForm.get('file').errors?.required"
+          text="Foto é requerida!">
+        </ap-vmessage>
+      </div>
 
+      <ng-template #previewImage>
+          <ap-photo
+            [url]="preview"
+            [description]="preview">
+          </ap-photo>
+      </ng-template>
+    
     </div>
 
     <div class="col-md-6">
