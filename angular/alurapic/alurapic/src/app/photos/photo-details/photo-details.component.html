@@ -8,11 +8,20 @@
             
             
             <div class="col-lg-4">
-                <h6>Descrição:</h6>
                 <small>
                     <p class="text-left break-word">{{photo.description}}</p>
                 </small>
                 
+                
+                <div class="text-left mb-2">
+                    <i class="fa fa-comment-o fa-2x mr-2 ml-2"></i>{{ photo.comments }}
+                    <i
+                        photoOwnerOnly
+                        [ownerPhoto]="photo"
+                        (click)="remove()"
+                        class="fa fa-trash-o fa-2x pull-right">
+                    </i>
+                </div>
                 <hr>
                 <ap-photo-comments
                     *ngIf="photo.allowComments; else warning"
