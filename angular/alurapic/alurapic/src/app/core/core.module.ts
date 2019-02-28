@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RequestInterceptor } from "./auth/request.interceptor";
 import { FooterComponent } from './footer/footer.component';
 import { DarkenOnHoverModule } from '../shared/directives/darken-on-hover/darken-on-hover.module';
+import { AlertModule } from '../shared/components/alert/alert.module';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { DarkenOnHoverModule } from '../shared/directives/darken-on-hover/darken
     imports: [
         CommonModule,
         RouterModule,
-        DarkenOnHoverModule
+        DarkenOnHoverModule,
+        AlertModule
     ],
     providers: [
         {
