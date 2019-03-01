@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { PhotoService } from './../../photo/photo.service';
 import { PhotoComment } from '../../photo/photo-comment';
 import { switchMap, tap } from 'rxjs/operators';
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
     selector: 'ap-photo-comments',
@@ -16,17 +17,21 @@ export class PhotoCommentsComponent implements OnInit {
     @Input() photoId: number;
     comments$: Observable<PhotoComment[]>
     commentForm: FormGroup;
+    logged: boolean = false;
 
     constructor(
         private photoService: PhotoService,
-        private formBuilder: FormBuilder){}
+        private formBuilder: FormBuilder,
+        private userService: UserService){}
 
     ngOnInit(): void {
         this.comments$ = this.photoService.getComments(this.photoId);
 
         this.commentForm = this.formBuilder.group({
             comment: ['', Validators.maxLength(300)]
-        })
+        });
+
+        this.logged = this.userService.isLogged();
     }
 
     save() {

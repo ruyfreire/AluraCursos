@@ -14,7 +14,8 @@
                 
                 
                 <div class="text-left mb-2">
-                    <i class="fa fa-comment-o fa-2x mr-2 ml-2"></i>{{ photo.comments }}
+                    <i ShowIfLogged class="fa fa-heart-o mr-3"> {{ photo.likes }} </i>
+                    <i class="fa fa-comment-o mr-3"> {{ photo.comments }} </i>
                     <i
                         photoOwnerOnly
                         [ownerPhoto]="photo"
@@ -27,7 +28,7 @@
                     *ngIf="photo.allowComments; else warning"
                     [photoId]="photoId">
                 </ap-photo-comments>
-
+                
                 <ng-template #warning>
                     <p>Usuário não permite comentários!!!</p>
                 </ng-template>

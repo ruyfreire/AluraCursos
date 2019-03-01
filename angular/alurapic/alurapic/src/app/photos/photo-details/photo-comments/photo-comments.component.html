@@ -13,7 +13,11 @@
 
 
     <div class="mt-4">
-        <form [formGroup]="commentForm" (submit)="save()">
+        <form
+            *ngIf="logged; else loginRequest"
+            [formGroup]="commentForm"
+            (submit)="save()">
+
             <div class="input-group">
                 
                 <textarea
@@ -33,5 +37,11 @@
             
 
         </form>
+
+        <ng-template #loginRequest>
+            <p>Necessário login para postar novos comentários!</p>
+        </ng-template>
+        
+
     </div>
 </div>

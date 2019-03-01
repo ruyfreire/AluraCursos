@@ -35,8 +35,12 @@ import { PhotoDetailsComponent } from './photos/photo-details/photo.details.comp
             component: PhotoDetailsComponent
         },
         {
-            path: '**',
+            path: 'not-found',
             component: NotFoundComponent
+        },
+        {
+            path: '**',
+            redirectTo: 'not-found'
         }
     ]
 
