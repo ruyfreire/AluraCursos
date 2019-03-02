@@ -19,8 +19,7 @@ export class PhotoListComponent implements OnInit {
   
   constructor(
     private activatedRoutes: ActivatedRoute,
-    private service: PhotoService
-  ) { }
+    private service: PhotoService ) { }
   
   ngOnInit(): void {
     this.activatedRoutes.params.subscribe(params => {
