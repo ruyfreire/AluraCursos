@@ -14,7 +14,7 @@
                 
                 
                 <div class="text-left mb-2">
-                    <i ShowIfLogged class="fa fa-heart-o mr-3"> {{ photo.likes }} </i>
+                    <i (click)="like(photo)" ShowIfLogged class="fa fa-heart-o mr-3"> {{ photo.likes }} </i>
                     <i class="fa fa-comment-o mr-3"> {{ photo.comments }} </i>
                     <i
                         photoOwnerOnly
@@ -25,6 +25,7 @@
                 </div>
                 <hr>
                 <ap-photo-comments
+                    (commented)="updateStatus(photo.id)"
                     *ngIf="photo.allowComments; else warning"
                     [photoId]="photoId">
                 </ap-photo-comments>

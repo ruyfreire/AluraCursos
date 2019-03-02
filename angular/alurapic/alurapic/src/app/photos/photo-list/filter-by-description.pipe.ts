@@ -5,11 +5,11 @@ import { Photo } from '../photo/photo';
 export class FilterByDescription implements PipeTransform {
     
     transform(photos: Photo[], description: string) {
-        description = description.trim().toLocaleLowerCase();
+        description = description.trim().toLowerCase();
 
         if(description){
             return photos.filter(photo =>
-                photo.description.toLocaleLowerCase().includes(description));
+                photo.description.toLowerCase().includes(description));
         } else {
             return photos;
         }

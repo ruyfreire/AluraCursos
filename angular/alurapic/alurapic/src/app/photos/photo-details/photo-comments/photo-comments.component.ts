@@ -1,10 +1,10 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Observable } from 'rxjs';
 
 import { PhotoService } from './../../photo/photo.service';
 import { PhotoComment } from '../../photo/photo-comment';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class PhotoCommentsComponent implements OnInit {
     comments$: Observable<PhotoComment[]>
     commentForm: FormGroup;
     logged: boolean = false;
+    @Output() commented = new EventEmitter();
 
     constructor(
         private photoService: PhotoService,
@@ -39,9 +40,13 @@ export class PhotoCommentsComponent implements OnInit {
 
         this.comments$ = this.photoService.addComments(this.photoId, commentText)
             .pipe(
-                switchMap(() => this.photoService.getComments(this.photoId))
+                switchMap(() => {
+                    this.commented.emit();
+                    return this.photoService.getComments(this.photoId);
+                })
             ).pipe(
                 tap(() => this.commentForm.reset())
-            );
+            );        
+        
     }
 }

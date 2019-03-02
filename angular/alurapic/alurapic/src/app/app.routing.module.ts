@@ -23,20 +23,32 @@ import { PhotoDetailsComponent } from './photos/photo-details/photo.details.comp
             component: PhotoListComponent,
             resolve: {
                 photos: PhotoListResolver
+            },
+            data: {
+                title: 'Timeline'
             }
         },
         {
             path: 'p/add',
             component: PhotoFormComponent,
-            canActivate: [AuthGuard]
+            canActivate: [AuthGuard],
+            data: {
+                title: 'Adicionar foto'
+            }
         },
         {
             path: 'p/:photoId',
-            component: PhotoDetailsComponent
+            component: PhotoDetailsComponent,
+            data: {
+                title: 'Foto detalhes'
+            }
         },
         {
             path: 'not-found',
-            component: NotFoundComponent
+            component: NotFoundComponent,
+            data: {
+                title: 'Não envontrada'
+            }
         },
         {
             path: '**',
