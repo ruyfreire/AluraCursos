@@ -2,14 +2,20 @@
     <nav class="navbar navbar-light bg-white">
         
         <a class="navbar-brand">
-            <i (click)="menu.toggle()" class="fa fa-bars mr-2"></i>
+            <i
+                tabindex="0"
+                (keyup.space)="menu.toggle()"
+                (click)="menu.toggle()"
+                class="fa fa-bars mr-2">
+            </i>
             ALURAPIC
         </a>
         
         <ap-menu #menu>
-            <ul>
-                <li>Menu 1</li>
-                <li>Menu 2</li>
+            <ul class="list-unstyled">
+                <li>
+                    <a ShowIfLogged [routerLink]="['p', 'add']">Upload</a>
+                </li>
             </ul>
         </ap-menu>
 

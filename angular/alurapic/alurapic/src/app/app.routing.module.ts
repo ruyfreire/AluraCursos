@@ -7,6 +7,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { AuthGuard } from './core/auth/auth.guard';
 import { PhotoDetailsComponent } from './photos/photo-details/photo.details.component';
+import { GlobalErrorComponent } from './errors/global-error/global-error.component';
 
     const routes: Routes = [
         {
@@ -41,6 +42,13 @@ import { PhotoDetailsComponent } from './photos/photo-details/photo.details.comp
             component: PhotoDetailsComponent,
             data: {
                 title: 'Foto detalhes'
+            }
+        },
+        {
+            path: 'error',
+            component: GlobalErrorComponent,
+            data: {
+                title: 'Erro na aplicação'
             }
         },
         {

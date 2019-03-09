@@ -10,6 +10,7 @@ import { DarkenOnHoverModule } from '../shared/directives/darken-on-hover/darken
 import { AlertModule } from '../shared/components/alert/alert.module';
 import { LoadingModule } from '../shared/components/loading/loading.module';
 import { MenuModule } from '../shared/components/menu/menu.module';
+import { ShowIfLoggedModule } from '../shared/directives/show-if-logged/show-if-logged.module';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { MenuModule } from '../shared/components/menu/menu.module';
         DarkenOnHoverModule,
         AlertModule,
         LoadingModule,
-        MenuModule
+        MenuModule,
+        ShowIfLoggedModule
     ],
     providers: [
         {
