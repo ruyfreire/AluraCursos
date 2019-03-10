@@ -9,6 +9,7 @@ import { SignUpComponent } from './signup/signup.component';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
 import { SignUpService } from "./signup/signup.service";
+import { AlertModule } from '../shared/components/alert/alert.module';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { SignUpService } from "./signup/signup.service";
         ReactiveFormsModule,
         VMessageModule,
         HomeRoutingModule,
-        RouterModule
+        RouterModule,
+        AlertModule
     ],
     providers: [
         SignUpService

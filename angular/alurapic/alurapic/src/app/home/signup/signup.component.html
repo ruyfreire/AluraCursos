@@ -2,16 +2,16 @@
 
     <h4 class="text-center"> Registre seu usuário no Alurapic! </h4>
 
-    <form [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
+    <form #form="ngForm" [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
 
         <div class="form-group">
             <input #emailInput formControlName="email" class="form-control" placeholder="email" autofocus>
             <ap-vmessage 
-                *ngIf="signupForm.get('email').errors?.required"
+                *ngIf="signupForm.get('email').errors?.required && (form.submitted || signupForm.get('email').touched)"
                 text="Email requerido!">
             </ap-vmessage>
             <ap-vmessage 
-                *ngIf="signupForm.get('email').errors?.email"
+                *ngIf="signupForm.get('email').errors?.email && (form.submitted || signupForm.get('email').touched)"
                 text="E-mail inválido">
             </ap-vmessage>            
         </div>
@@ -19,15 +19,15 @@
         <div class="form-group">
             <input formControlName="fullName" class="form-control" placeholder="full name">
             <ap-vmessage 
-                *ngIf="signupForm.get('fullName').errors?.required"
+                *ngIf="signupForm.get('fullName').errors?.required && (form.submitted || signupForm.get('fullName').touched)"
                 text="Nome completo requerido!">
             </ap-vmessage>
             <ap-vmessage 
-                *ngIf="signupForm.get('fullName').errors?.minlength"
+                *ngIf="signupForm.get('fullName').errors?.minlength && (form.submitted || signupForm.get('fullName').touched)"
                 text="Tamanho mínimo é 5">
             </ap-vmessage>
             <ap-vmessage 
-                *ngIf="signupForm.get('fullName').errors?.maxlength"
+                *ngIf="signupForm.get('fullName').errors?.maxlength && (form.submitted || signupForm.get('fullName').touched)"
                 text="Tamanho máximo é 40">
             </ap-vmessage>              
         </div>
@@ -35,19 +35,19 @@
         <div class="form-group">
             <input formControlName="userName" class="form-control" placeholder="user name">
             <ap-vmessage 
-                *ngIf="signupForm.get('userName').errors?.required"
+                *ngIf="signupForm.get('userName').errors?.required && (form.submitted || signupForm.get('userName').touched)"
                 text="Nome de usuário requerido!">
             </ap-vmessage>
             <ap-vmessage 
-                *ngIf="signupForm.get('userName').errors?.minlength"
+                *ngIf="signupForm.get('userName').errors?.minlength && (form.submitted || signupForm.get('userName').touched)"
                 text="Tamanho mínimo é 3">
             </ap-vmessage>
             <ap-vmessage 
-                *ngIf="signupForm.get('userName').errors?.maxlength"
+                *ngIf="signupForm.get('userName').errors?.maxlength && (form.submitted || signupForm.get('userName').touched)"
                 text="Tamanho máximo é 30">
             </ap-vmessage>
             <ap-vmessage 
-                *ngIf="signupForm.get('userName').errors?.lowerCase"
+                *ngIf="signupForm.get('userName').errors?.lowerCase && (form.submitted || signupForm.get('userName').touched)"
                 text="Usuário deve ser minúsculo, e iniciar com letra">
             </ap-vmessage>
             <ap-vmessage 
@@ -60,20 +60,24 @@
         <div class="form-group">
             <input formControlName="password" type="password" class="form-control" placeholder="password">
             <ap-vmessage 
-                *ngIf="signupForm.get('password').errors?.required"
+                *ngIf="signupForm.get('password').errors?.required && (form.submitted || signupForm.get('password').touched)"
                 text="Senha requerida!">
             </ap-vmessage>
             <ap-vmessage 
-                *ngIf="signupForm.get('password').errors?.minlength"
+                *ngIf="signupForm.get('password').errors?.minlength && (form.submitted || signupForm.get('password').touched)"
                 text="Tamanho mínimo é 8">
             </ap-vmessage>
             <ap-vmessage 
-                *ngIf="signupForm.get('password').errors?.maxlength"
+                *ngIf="signupForm.get('password').errors?.maxlength && (form.submitted || signupForm.get('password').touched)"
                 text="Tamanho máximo é 14">
+            </ap-vmessage>
+            <ap-vmessage 
+                *ngIf="signupForm.errors?.userNamePasswordValidator && form.submitted"
+                text="Senha igual nome de usuário">
             </ap-vmessage>
         </div>
 
-        <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block">Registrar</button>
+        <button class="btn btn-primary btn-block">Registrar</button>
         
         <p>Já tem usuário?
             <a [routerLink]="['']">Faça login</a>

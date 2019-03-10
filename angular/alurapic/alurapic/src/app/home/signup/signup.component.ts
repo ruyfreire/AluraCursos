@@ -7,6 +7,8 @@ import { UserNotTakenValidatorService } from './user-not-taken.validator.service
 import { SignUpService } from './signup.service';
 import { NewUser } from './new-user';
 import { PlataformDetectorService } from './../../core/plataform-detector/plataform-detector.service';
+import { AlertService } from 'src/app/shared/components/alert/alert.service';
+import { userNamePasswordValidator } from './username-password.validator';
 
 @Component({
     templateUrl: './signup.component.html',
@@ -22,7 +24,8 @@ export class SignUpComponent implements OnInit {
         private userTaken: UserNotTakenValidatorService,
         private signUpService: SignUpService,
         private router: Router,
-        private plataformDetectorService: PlataformDetectorService) {}
+        private plataformDetectorService: PlataformDetectorService,
+        private alertService: AlertService) {}
     
     ngOnInit(): void {
         this.signupForm = this.formBuilder.group({
@@ -55,6 +58,9 @@ export class SignUpComponent implements OnInit {
                     Validators.maxLength(14),
                 ]
             ],
+        },
+        {
+            validator: userNamePasswordValidator
         });
 
         this.plataformDetectorService.isPlatformBrowser &&
@@ -62,14 +68,17 @@ export class SignUpComponent implements OnInit {
     }
 
     signup() {
-        const newUser = this.signupForm.getRawValue() as NewUser;
-        this.signUpService.signup(newUser)
-            .subscribe(() => {
-                    this.router.navigate(['']);
-                    alert(`Usuário ${newUser.userName} cadastrado com sucesso!`);
-                },
-                err => console.log(err)
-            );
+        if(this.signupForm.valid && !this.signupForm.pending) {
+
+            const newUser = this.signupForm.getRawValue() as NewUser;
+            this.signUpService.signup(newUser)
+                .subscribe(() => {
+                        this.router.navigate(['']);
+                        this.alertService.success(`Usuário ${newUser.userName} cadastrado com sucesso`);
+                    },
+                    err => console.log(err)
+                );
+        }
     }
 
 }
