@@ -1,0 +1,21 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Servidor NodeJS</title>
+</head>
+<body>
+    <h1>Busca por ID de livro</h1>                
+    <table border="1">
+        <thead>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+        </thead>
+        <tbody for(livro in data.livros)>
+            <td>${livro.id}</td>
+            <td>${livro.titulo}</td>
+            <td>${livro.descricao}</td>
+        </tbody>
+    </table> 
+</body>
+</html>

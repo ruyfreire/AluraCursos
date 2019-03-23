@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Servidor NodeJS</title>
+</head>
+<body>
+    <h1>Buscar livros por ID</h1>
+
+    <form>
+        <p>Digite o ID que deseja buscar:</p>
+        <label>
+            ID:
+            <input type="text" id="id">
+        </label>
+        <input type="button" onclick="busca()" value="Buscar" />
+    </form>
+
+    <script>
+        function busca() {
+            const id = document.querySelector('#id').value;
+            window.location = '/livros/buscarid/' + id;
+        }
+    </script>
+</body>
+</html>

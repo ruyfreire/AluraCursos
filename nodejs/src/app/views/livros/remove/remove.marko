@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Servidor NodeJS</title>
+</head>
+<body>
+    <h1>Remover livros</h1>
+
+    <form action="/livros/remove" method="post">
+
+        <p>Selecione o livro que deseja remover:</p>
+        <select name="id">
+            <option for(livro in data.livros)
+                value="${livro.id}">
+                ${livro.titulo}
+            </option>
+        </select>
+
+        <input type="submit" value="Remover" />
+    </form>
+</body>
+</html>
