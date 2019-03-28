@@ -68,9 +68,7 @@ class LivrosDao {
             this._db.run(`
                 DELETE FROM livros
                 WHERE id = ?`,
-                [
-                    id
-                ], error => {
+                [id], error => {
                     if(error){
                         console.log(error);
                         return reject('Não foi possível remover o livro!');
@@ -81,7 +79,7 @@ class LivrosDao {
         });
     }
 
-    buscarPorId(id) {
+    buscaPorId(id) {
         return new Promise((resolve, reject) => {
             this._db
                 .get(`
