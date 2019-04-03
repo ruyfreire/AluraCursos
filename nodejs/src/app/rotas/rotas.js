@@ -3,17 +3,9 @@ const LivroDao = require('../infra/livros-dao');
 
 module.exports = (app) => {
     app.get('/', function(req, res){
-        res.send(`
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <title>Servidor NodeJS</title>
-            </head>
-            <body>
-                <h1>Casa do Código</h1>
-            </body>
-            </html>
-        `);
+        res.marko(
+            require('../views/base/home/home.marko')
+        );
     });
     
 
@@ -40,6 +32,16 @@ module.exports = (app) => {
         const livroDao = new LivroDao(db);
         livroDao
             .adiciona(req.body)
+            .then(() => res.redirect('/livros'))
+            .catch(error => console.log(error));
+    });
+
+    app.put('/livros', function(req, res) {
+        console.log(req.body);
+
+        const livroDao = new LivroDao(db);
+        livroDao
+            .atualiza(req.body)
             .then(() => res.redirect('/livros'))
             .catch(error => console.log(error));
     });
