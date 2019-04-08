@@ -1,78 +1,41 @@
-const db = require('../../config/database');
-const LivroDao = require('../infra/livros-dao');
+const { check } = require('express-validator/check');
+
+const BaseControlador = require('../controladores/BaseControlador');
+const baseControlador = new BaseControlador();
+
+const LivroControlador = require('../controladores/LivroControlador');
+const livroControlador = new LivroControlador();
 
 module.exports = (app) => {
-    app.get('/', function(req, res){
-        res.marko(
-            require('../views/base/home/home.marko')
-        );
-    });
+    app.get('/', baseControlador.home());
     
 
-    app.get('/livros', function(req, res){
-
-        const livroDao = new LivroDao(db);
-        livroDao
-            .lista()
-            .then(livros => 
-                res.marko(
-                    require('../views/livros/lista/lista.marko'),
-                    {
-                        livros
-                    }
-                )
-            )
-            .catch(error => console.log(error));
-    });
+    app.get('/livros', livroControlador.lista());
 
 
-    app.post('/livros', function(req, res) {
-        console.log(req.body);
-
-        const livroDao = new LivroDao(db);
-        livroDao
-            .adiciona(req.body)
-            .then(() => res.redirect('/livros'))
-            .catch(error => console.log(error));
-    });
-
-    app.put('/livros', function(req, res) {
-        console.log(req.body);
-
-        const livroDao = new LivroDao(db);
-        livroDao
-            .atualiza(req.body)
-            .then(() => res.redirect('/livros'))
-            .catch(error => console.log(error));
-    });
+    app.post('/livros', [
+        check('titulo')
+            .isLength(
+                { min: 5 }
+            ).withMessage('O Título do livro deve ter no mínimo 5 caracteres!'),
+        
+        check('preco')
+            .isCurrency({
+                thousands_separator: '.',
+                decimal_separator: ',' 
+            }).withMessage('O Preço deve ser no padrão 0.000,00!')
+        ],
+    livroControlador.adiciona());
 
 
-    app.get('/livros/form', function(req, res) {
-        res.marko( require('../views/livros/form/form.marko'), {livro:{}} );
-    });
+    app.put('/livros', livroControlador.atualiza());
 
 
-    app.get('/livros/form/:id', function(req, resp) {
-        const id = req.params.id;
-        const livroDao = new LivroDao(db);
-    
-        livroDao.buscaPorId(id)
-            .then(livro => 
-                resp.marko(
-                    require('../views/livros/form/form.marko'),
-                    { livro: livro }
-                )
-            )
-            .catch(erro => console.log(erro));
-    });
+    app.get('/livros/form', livroControlador.formulario());
 
 
-    app.delete('/livros/:id', function(req, resp) {
-        const id = req.params.id;
-    
-        const livroDao = new LivroDao(db);
-        livroDao.remove(id)
-            .then(() => resp.status(200).end())
-            .catch(erro => console.log(erro));
-    });
+    app.get('/livros/form/:id', livroControlador.buscaPorId());
+
+
+    app.delete('/livros/:id', livroControlador.remove());
 }

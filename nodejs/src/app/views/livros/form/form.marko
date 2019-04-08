@@ -13,6 +13,9 @@
                         <h1 class="logo"><img src="/estatico/imagens/logo-casadocodigo.svg" alt="Casa do Código" /></h1>
                     </div>
                     <div class="cabecalhoPrincipal-navegacao col-8">
+                        <a href="/" class="login">Home</a>
+                        <a href="/livros" class="login">Livros</a>
+                        <a href="/livros/form" class="login">Cadastro</a>
                         <a href="#" class="login">
                             <i class="fas fa-sign-in-alt"></i>Login
                         </a>
@@ -24,6 +27,10 @@
             <div class="container">
                 <h1>Cadastro de livros</h1>
                 
+                <div class="alert alert-danger" for(erro in data.errosValidacao)>
+                    <span>${erro.param} - ${erro.msg}</span>
+                </div>
+
                 <form action="/livros" method="post">
 
                     <div if(data.livro.id)>
