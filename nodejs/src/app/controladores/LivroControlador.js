@@ -5,6 +5,16 @@ const { validationResult } = require('express-validator/check');
 
 class LivroControladores {
 
+    static rotas() {
+        return {
+            lista: '/livros',
+            cadastro: '/livros/form',
+            edicao: '/livros/form/:id',
+            delecao: '/livros/:id'
+        }
+
+    }
+
 
     lista() {
         return (req, res) => {

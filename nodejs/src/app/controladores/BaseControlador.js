@@ -1,4 +1,11 @@
 class BaseControlador {
+
+    static rotas() {
+        return {
+            home: '/'
+        }
+
+    }
     
     home() {
         return (req, res) => {
