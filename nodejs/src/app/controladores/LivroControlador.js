@@ -3,6 +3,8 @@ const LivroDao = require('../infra/livros-dao');
 
 const { validationResult } = require('express-validator/check');
 
+const templates = require('../views/templates');
+
 class LivroControladores {
 
     static rotas() {
@@ -20,15 +22,17 @@ class LivroControladores {
         return (req, res) => {
 
             const livroDao = new LivroDao(db);
+            let li;
             livroDao
                 .lista()
-                .then(livros => 
-                    res.marko(
-                        require('../views/livros/lista/lista.marko'),
-                        {
-                            livros
-                        }
-                    )
+                .then(livros => {
+                    res.json(livros)
+                }
+                    
+                    // res.marko(
+                    //     templates.livros.lista,
+                    //     { livros }
+                    // )
                 )
                 .catch(error => console.log(error));
         }
@@ -36,7 +40,7 @@ class LivroControladores {
 
     formulario() {
         return (req, res) => {
-            res.marko( require('../views/livros/form/form.marko'), {livro:{}} );
+            res.marko( templates.livros.form, {livro:{}} );
         }
     }
 
@@ -46,11 +50,13 @@ class LivroControladores {
     
             const errors = validationResult(req);
             if(!errors.isEmpty())
-                return res.marko( require('../views/livros/form/form.marko'),
-                {
-                    livro: req.body,
-                    errosValidacao: errors.array()
-                });
+                return res.marko(
+                    templates.livros.form,
+                    {
+                        livro: req.body,
+                        errosValidacao: errors.array()
+                    }
+                );
     
             const livroDao = new LivroDao(db);
             livroDao
@@ -80,7 +86,7 @@ class LivroControladores {
             livroDao.buscaPorId(id)
                 .then(livro => 
                     resp.marko(
-                        require('../views/livros/form/form.marko'),
+                        templates.livros.form,
                         { livro: livro }
                     )
                 )
