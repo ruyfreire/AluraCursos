@@ -25,14 +25,11 @@ class LivroControladores {
             let li;
             livroDao
                 .lista()
-                .then(livros => {
-                    res.json(livros)
-                }
-                    
-                    // res.marko(
-                    //     templates.livros.lista,
-                    //     { livros }
-                    // )
+                .then(livros =>                    
+                    res.marko(
+                        templates.livros.lista,
+                        { livros }
+                    )
                 )
                 .catch(error => console.log(error));
         }
