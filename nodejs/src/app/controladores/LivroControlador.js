@@ -9,6 +9,7 @@ class LivroControladores {
 
     static rotas() {
         return {
+            autenticados: '/livros*',
             lista: '/livros',
             cadastro: '/livros/form',
             edicao: '/livros/form/:id',
@@ -22,14 +23,15 @@ class LivroControladores {
         return (req, res) => {
 
             const livroDao = new LivroDao(db);
-            let li;
             livroDao
                 .lista()
-                .then(livros =>                    
+                .then(livros => {
+                    let username = req.user.nome;
                     res.marko(
                         templates.livros.lista,
-                        { livros }
-                    )
+                        { livros, username }
+                    );
+                }
                 )
                 .catch(error => console.log(error));
         }
@@ -37,7 +39,8 @@ class LivroControladores {
 
     formulario() {
         return (req, res) => {
-            res.marko( templates.livros.form, {livro:{}} );
+            let username = req.user.nome;
+            res.marko( templates.livros.form, {livro:{}, username} );
         }
     }
 
@@ -46,14 +49,17 @@ class LivroControladores {
             console.log(req.body);
     
             const errors = validationResult(req);
-            if(!errors.isEmpty())
-                return res.marko(
-                    templates.livros.form,
-                    {
-                        livro: req.body,
-                        errosValidacao: errors.array()
-                    }
-                );
+            if(!errors.isEmpty()) {
+                let username = req.user.nome;
+                    return res.marko(
+                        templates.livros.form,
+                        {
+                            livro: req.body,
+                            errosValidacao: errors.array(),
+                            username
+                        }
+                    );
+            }
     
             const livroDao = new LivroDao(db);
             livroDao
@@ -81,11 +87,13 @@ class LivroControladores {
             const livroDao = new LivroDao(db);
         
             livroDao.buscaPorId(id)
-                .then(livro => 
+                .then(livro => {
+                    let username = req.user.nome;
                     resp.marko(
                         templates.livros.form,
-                        { livro: livro }
+                        { livro: livro, username }
                     )
+                }
                 )
                 .catch(erro => console.log(erro));
         }

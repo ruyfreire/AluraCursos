@@ -17,7 +17,9 @@
                     <a href="/livros" class="login">Livros</a>
                     <a href="/livros/form" class="login">Cadastro</a>
                     <a href="/login" class="login">
-                        <i class="fas fa-sign-in-alt"></i>Login
+                        <i class="fas fa-sign-in-alt"></i>
+                        <if(data.username)>${data.username}</if>
+                        <else>Login</else>
                     </a>
                 </div>
             </div>

@@ -13,8 +13,10 @@ class BaseControlador {
     
     home() {
         return (req, res) => {
+            let username = req.user.nome;
             res.marko(
-                templates.base.home
+                templates.base.home,
+                { username }
             );
         }
     }
