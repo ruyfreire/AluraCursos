@@ -5,6 +5,18 @@ module.exports = (app) => {
     });
 
     app.post('/pagamentos/pagamento', function(req, res){
+
+        req.assert('forma_de_pagamento', 'Forma de pagamento é obrigatório').notEmpty();
+        req.assert('valor', 'Valor é obrigatório e deve ser decimal').notEmpty().isFloat();
+
+        let erros = req.validationErrors();
+        if(erros) {
+            console.log('Dados inválidos!');
+            res.status(400).send(erros);
+            return;
+        }
+
+
         let pagamento = req.body;
         console.log('Criando pagamento');
 
@@ -18,6 +30,7 @@ module.exports = (app) => {
         pagamentoDao.salva(pagamento, function(exception, result){
             if(exception) {
                 console.log('erro: ' + exception);
+                res.status(400);
                 res.send('Erro na operação');
             }
             else {
