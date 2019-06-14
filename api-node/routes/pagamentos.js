@@ -30,12 +30,13 @@ module.exports = (app) => {
         pagamentoDao.salva(pagamento, function(exception, result){
             if(exception) {
                 console.log('erro: ' + exception);
-                res.status(400);
+                res.status(500);
                 res.send('Erro na operação');
             }
             else {
                 console.log('pagamento criado: ' + result);
-                res.json(pagamento);
+                res.location('/pagamentos/pagamento/' + result.insertId);
+                res.status(201).json(pagamento);
             }
         });
     });
