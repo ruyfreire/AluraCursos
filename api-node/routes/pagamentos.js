@@ -40,4 +40,46 @@ module.exports = (app) => {
             }
         });
     });
+
+    app.put('/pagamentos/pagamento/:id', function(req, res){
+        let id = req.params.id;
+        let pagamento = {};
+        pagamento.id = id;
+        pagamento.status = 'CONFIRMADO';
+
+        let connection = app.persistencia.connectionFactory();
+        let pagamentoDao = new app.persistencia.PagamentoDao(connection);
+
+        pagamentoDao.atualiza(pagamento, function(erro){
+            if(erro) {
+                console.log(erro);
+                res.status(500).send('Erro na operação');
+                return;
+            }
+            
+            console.log('Pagamento confirmado.');
+            res.status(200).send(pagamento);
+        })
+    });
+
+    app.delete('/pagamentos/pagamento/:id', function(req, res){
+        let id = req.params.id;
+        let pagamento = {};
+        pagamento.id = id;
+        pagamento.status = 'CANCELADO';
+
+        let connection = app.persistencia.connectionFactory();
+        let pagamentoDao = new app.persistencia.PagamentoDao(connection);
+
+        pagamentoDao.atualiza(pagamento, function(erro){
+            if(erro) {
+                console.log(erro);
+                res.status(500).send('Erro na operação');
+                return;
+            }
+
+            console.log('Pagamento cancelado.');
+            res.status(204).send();
+        })
+    });
 }
