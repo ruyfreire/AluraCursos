@@ -13,6 +13,7 @@ app.use(expressValidator());
 consign()
     .include('routes')
     .then('persistencia')
+    .then('servicos')
     .into(app);
 
 module.exports = app;
