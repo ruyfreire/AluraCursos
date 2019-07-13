@@ -106,6 +106,41 @@ module.exports = (app) => {
         });
     });
 
+    app.get('/pagamentos/pagamento/:id', function(req, res){
+
+        const id = req.params.id;
+
+        console.log('====================  SISTEMA PAYFAST  ======================');
+        console.log('Consultando pagamento: ' + id);
+
+        const connection = app.persistencia.connectionFactory();
+        const pagamentoDao = new app.persistencia.PagamentoDao(connection);
+
+        pagamentoDao.buscaPorId(id, function(exception, result){
+            if(exception) {
+                console.log('erro: ' + JSON.stringify(exception));
+                res.status(500);
+                res.send('Erro na operação');
+            }
+            else {
+                if(!result.length) {
+                    console.log('pagamento NÃO encontrado');
+                    console.log(result);
+                    console.log('=============================================================');
+
+                    res.status(404).send('Pagamento não encontrado!');
+                }
+                else {
+                    console.log('pagamento encontrado');
+                    console.log(result);
+                    console.log('=============================================================');
+    
+                    res.status(200).json(result);
+                }
+            }
+        });
+    });
+
     app.put('/pagamentos/pagamento/:id', function(req, res){
         let id = req.params.id;
         let pagamento = {};
