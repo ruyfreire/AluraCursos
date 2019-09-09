@@ -16,10 +16,9 @@ class FormAutor extends Component {
 
     enviaForm(evento) {
 		evento.preventDefault();
-		fetch('https://cdc-react.herokuapp.com/api/autores', {
+		fetch('http://localhost:3003/autores/cadastrar', {
 			headers: new Headers( {'Content-Type': 'application/json'} ),
 			method: 'post',
-			mode: 'cors',
 			body: JSON.stringify({
 				nome: this.state.nome,
 				email: this.state.email,
@@ -27,22 +26,16 @@ class FormAutor extends Component {
 			})
 		})
 		.then( resp => {
-			if(resp.status == 400) {
-				console.log('Erro 400 no envio dos dados!');
-				return;
+			if(resp.status != 201) {
+				resp.json()
+				.then(data => {
+					console.log(data);
+				})
 			}
 			else {
 				resp.json()
 				.then(data => {
-					let autores = [];
-					data.map(autor => {
-						if(autor.nome == 'ruy') {
-							autores.push(autor);
-						}
-					})
-					this.props.atualiza(autores);
-		
-					console.log('Dados enviados!')
+					this.props.atualiza(data);
 				})
 			}
 		})
@@ -139,7 +132,7 @@ export default class AutorBox extends Component {
     }
 
     componentDidMount() {
-		fetch('https://cdc-react.herokuapp.com/api/autores')
+        fetch('http://localhost:3003/autores')
         .then(resp => {
             if(resp.status != 200) {
                 console.log('Erro na requisição dos dados!');
@@ -147,16 +140,8 @@ export default class AutorBox extends Component {
             }
             else {
                 resp.json()
-                .then(data => {
-                    let autores = [];
-
-                    data.map(autor => {
-                        if(autor.nome == 'ruy') {
-                            autores.push(autor);
-                        }
-                    })
-                    this.setState({ lista: autores });
-                    console.log('Dados Carregados!')
+                .then( data => {
+                    this.setState({ lista: data });
                 })
             }
         })
