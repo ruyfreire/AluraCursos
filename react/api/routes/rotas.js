@@ -28,12 +28,18 @@ module.exports = (app) => {
             .catch( () => res.status(201).send('Adicionado, porém com erro para retornar atualizado!') );
         })
         .catch(error => {
-            if(error == 'tamanho') res.status(400).json('Campos devem ser maior que 3 digitos')
-            else if(error == 'existe') res.status(400).json('Autor já existe')
+            if(error.qtd > 0)
+                res.status(400).json(error);
             else {
                 console.log(error);
                 res.status(500).json(error);
             }
+            // if(error == 'tamanho') res.status(400).json('Campos devem ser maior que 3 digitos')
+            // else if(error == 'existe') res.status(400).json('Autor já existe')
+            // else {
+            //     console.log(error);
+            //     res.status(500).json(error);
+            // }
         });
     });
 }

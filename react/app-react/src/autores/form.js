@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PubSub from 'pubsub-js';
 
+import TratarErros from '../help/TratarErros';
 import InputCustom from '../customs/inputs';
 import ButtomCustom from '../customs/buttoms';
 
@@ -8,14 +10,16 @@ class FormAutor extends Component {
     constructor() {
 		super();
 		this.state = { nome: '', email: '', senha: '' };
-		this.enviaForm = this.enviaForm.bind(this);
+		// this.enviaForm = this.enviaForm.bind(this);
 		this.setNome = this.setNome.bind(this);
 		this.setEmail = this.setEmail.bind(this);
 		this.setSenha = this.setSenha.bind(this);
     }
 
     enviaForm(evento) {
-		evento.preventDefault();
+        evento.preventDefault();
+        PubSub.publish('limpa-campo', {});
+
 		fetch('http://localhost:3003/autores/cadastrar', {
 			headers: new Headers( {'Content-Type': 'application/json'} ),
 			method: 'post',
@@ -26,16 +30,20 @@ class FormAutor extends Component {
 			})
 		})
 		.then( resp => {
-			if(resp.status != 201) {
+			if(resp.status !== 201) {
 				resp.json()
-				.then(data => {
-					console.log(data);
+				.then(error => {
+					new TratarErros().validaCampo(error);
 				})
 			}
 			else {
 				resp.json()
 				.then(data => {
-					this.props.atualiza(data);
+                    PubSub.publish('atualiza-lista-autores', data);
+                    this.setState({nome:'',email:'',senha:''});                    
+
+                    // chamando callback de atualiza, método sem o middleware (pubsub)
+					// this.props.atualiza(data);
 				})
 			}
 		})
@@ -128,7 +136,7 @@ export default class AutorBox extends Component {
     constructor() {
         super();
         this.state = { lista: [] };
-        this.atualizaLista = this.atualizaLista.bind(this);
+        // this.atualizaLista = this.atualizaLista.bind(this);
     }
 
     componentDidMount() {
@@ -146,16 +154,25 @@ export default class AutorBox extends Component {
             }
         })
         .catch(err => {console.log(err)});
+
+        PubSub.subscribe('atualiza-lista-autores',
+            (topico, novaLista) => this.setState({lista: novaLista}) );
     }
 
-    atualizaLista(lista) {
-        this.setState({ lista })
-    }
+    // ==== metodo para atualizar sem o middleware (pubsub) ====
+    // atualizaLista(lista) {
+    //     this.setState({ lista })
+    // }
     
     render() {
         return(
             <div>
-                <FormAutor atualiza={this.atualizaLista}/>
+                {/* // ==== metodo para atualizar sem o middleware (pubsub) ==== */}
+                {/* <FormAutor atualiza={this.atualizaLista}/> */}
+
+
+                {/* // ==== não chama callback, porque usa o middleware (pubsub) ==== */}
+                <FormAutor/>
 
                 <TabelaAutor lista={this.state.lista}/>
             </div>

@@ -2,3 +2,9 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.msg-erro {
+    font-size: 10px;
+    color: #fd0000;
+    margin-left: 5px;
+}
