@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PubSub from 'pubsub-js';
 
 import TratarErros from '../help/TratarErros';
-import InputCustom from '../customs/inputs';
-import ButtomCustom from '../customs/buttoms';
+import InputCustom from '../components/Inputs';
+import ButtomCustom from '../components/Buttoms';
 
 class FormAutor extends Component {
 
@@ -167,14 +167,19 @@ export default class AutorBox extends Component {
     render() {
         return(
             <div>
-                {/* // ==== metodo para atualizar sem o middleware (pubsub) ==== */}
-                {/* <FormAutor atualiza={this.atualizaLista}/> */}
+                <div className="header">
+                    <h1>Cadastro de Autores</h1>
+                </div>
 
+                <div className="content" id="content">
+                    {/* // ==== metodo para atualizar sem o middleware (pubsub) ==== */}
+                    {/* <FormAutor atualiza={this.atualizaLista}/> */}
 
-                {/* // ==== não chama callback, porque usa o middleware (pubsub) ==== */}
-                <FormAutor/>
+                    {/* // ==== não chama callback, porque usa o middleware (pubsub) ==== */}
+                    <FormAutor/>
 
-                <TabelaAutor lista={this.state.lista}/>
+                    <TabelaAutor lista={this.state.lista}/>
+                </div>
             </div>
         );
     }
