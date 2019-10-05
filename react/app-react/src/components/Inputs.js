@@ -24,18 +24,36 @@ export default class InputCustom extends Component {
     }
 
     componentDidMount() {
-        PubSub.subscribe('erro-validacao', (topico, erro) => {
+        PubSub.subscribe('erro-validacao-autor', (topico, erro) => {
             switch(this.props.name) {
                 case 'nome': this.setState({erro: erro.msg[0].nome}); break;
 
                 case 'email': this.setState({erro: erro.msg[0].email}); break;
 
                 case 'senha': this.setState({erro: erro.msg[0].senha}); break;
+
+                default: break;
             }
         });
 
-        PubSub.subscribe('limpa-campo', (topico, data) => {
+        PubSub.subscribe('erro-validacao-livro', (topico, erro) => {
+            switch(this.props.name) {
+                case 'titulo': this.setState({erro: erro.msg[0].titulo}); break;
+
+                case 'preco': this.setState({erro: erro.msg[0].preco}); break;
+
+                case 'autor': this.setState({erro: erro.msg[0].autorId}); break;
+
+                default: break;
+            }
+        });
+
+        PubSub.subscribe('limpa-erros', (topico, data) => {
             this.setState({erro: ''});
         })
+    }
+
+    componentWillUnmount() {
+        PubSub.clearAllSubscriptions();
     }
 }

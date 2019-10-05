@@ -1,4 +1,4 @@
-class AutoresDao {
+class LivrosDao {
 
     constructor(db) {
         this._db = db;
@@ -9,38 +9,36 @@ class AutoresDao {
         };
     }
 
-    reportaErro() {
-         console.log(this);
-    }
-
     listar() {
         return new Promise((resolve, reject) => {                
-            this._db.all(`SELECT * FROM autores`,
+            this._db.all(`SELECT * FROM livros`,
             (err, rows) => {
                 if(err) {
                     console.log(err);
-                    return reject('Erro ao buscar Autores');
+                    return reject('Erro ao buscar livros');
                 }
-                resolve(rows);
+                else {
+                    resolve(rows);
+                }
             });
         });
     }
 
-    adiciona(autor) {
+    adiciona(livro) {
         return new Promise((resolve, reject) => {
             
-            let validacoes = {nome:'',email:'',senha:''};
+            let validacoes = {titulo:'',preco:'',autorId:''};
 
-            if(autor.nome.trim().length == 0) {
-                validacoes.nome = 'Nome não pode estar vazio';
+            if(livro.titulo.trim().length < 3) {
+                validacoes.titulo = 'Titulo inválido';
                 this._erros.qtd++;
             }
-            if(autor.email.trim().length == 0) {
-                validacoes.email = 'Email não pode estar vazio';
+            if(isNaN(livro.preco) || livro.preco <= 0) {
+                validacoes.preco = 'Preço inválido';
                 this._erros.qtd++;
             }
-            if(String(autor.senha).trim().length == 0) {
-                validacoes.senha = 'Senha não pode estar vazia';
+            if(livro.autorId == 0) {
+                validacoes.autorId = 'Selecione um autor';
                 this._erros.qtd++;
             }
             if(this._erros.qtd > 0) {
@@ -50,23 +48,23 @@ class AutoresDao {
             }
 
             this._db.run(`
-                INSERT INTO autores (
-                    nome,
-                    email,
-                    senha
+                INSERT INTO livros (
+                    titulo,
+                    preco,
+                    autorId
                 )
-                SELECT '${autor.nome}', '${autor.email}', '${autor.senha}' WHERE NOT EXISTS (SELECT * FROM autores WHERE email = '${autor.email}')`,
+                SELECT '${livro.titulo}', '${livro.preco}', '${livro.autorId}' WHERE NOT EXISTS (SELECT * FROM livros WHERE titulo = '${livro.titulo}')`,
                 function(error) {
                     if(error){
                         console.log(error);
-                        return reject('Não foi possível adicionar o autor!');
+                        return reject('Não foi possível adicionar o livro!');
                     }
                     else {
                         if(this.changes == 0) {
                             return reject({
                                 tipo: 'existe',
                                 qtd: 1,
-                                msg: [{usuario: 'Usuário já existente'}]
+                                msg: [{livro: 'Livro já existente'}]
                             });
                         }
                         resolve();
@@ -77,4 +75,4 @@ class AutoresDao {
     }
 }
 
-module.exports = AutoresDao;
+module.exports = LivrosDao;

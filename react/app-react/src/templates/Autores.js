@@ -18,7 +18,7 @@ class FormAutor extends Component {
 
     enviaForm(evento) {
         evento.preventDefault();
-        PubSub.publish('limpa-campo', {});
+        PubSub.publish('limpa-erros', {});
 
 		fetch('http://localhost:3003/autores/cadastrar', {
 			headers: new Headers( {'Content-Type': 'application/json'} ),
@@ -33,7 +33,7 @@ class FormAutor extends Component {
 			if(resp.status !== 201) {
 				resp.json()
 				.then(error => {
-					new TratarErros().validaCampo(error);
+					new TratarErros().validaAutor(error);
 				})
 			}
 			else {

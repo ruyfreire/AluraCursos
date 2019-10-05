@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import './css/pure-min.css';
 import './css/side-menu.css';
 import './css/custom.css';
-
-import Home from './templates/Home';
-import AutorBox from './templates/Cadastro';
-import Livro from './templates/Livros';
 
 
 class App extends Component {
