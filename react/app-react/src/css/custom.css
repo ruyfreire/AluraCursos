@@ -8,3 +8,8 @@
     color: #fd0000;
     margin-left: 5px;
 }
+
+#autor {
+    min-width: 195px;
+    height: auto;
+}

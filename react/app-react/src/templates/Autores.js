@@ -10,10 +10,6 @@ class FormAutor extends Component {
     constructor() {
 		super();
 		this.state = { nome: '', email: '', senha: '' };
-		// this.enviaForm = this.enviaForm.bind(this);
-		this.setNome = this.setNome.bind(this);
-		this.setEmail = this.setEmail.bind(this);
-		this.setSenha = this.setSenha.bind(this);
     }
 
     enviaForm(evento) {
@@ -50,14 +46,10 @@ class FormAutor extends Component {
 		.catch(err => {console.log(err)});
 	}
 
-	setNome(evento) {
-		this.setState({ nome: evento.target.value});
-	}
-	setEmail(evento) {
-		this.setState({ email: evento.target.value});
-	}
-	setSenha(evento) {
-		this.setState({ senha: evento.target.value});
+	setCampo = (campo, event) => {
+        const obt = {};
+        obt[campo] = event.target.value;
+		this.setState( obt );
 	}
     
     render() {
@@ -70,7 +62,7 @@ class FormAutor extends Component {
                         type="text"
                         name="nome"
                         value={this.state.nome}
-                        onChange={this.setNome} />
+                        onChange={this.setCampo.bind('event', 'nome')} />
 
                     <InputCustom
                         label="Email"
@@ -78,7 +70,7 @@ class FormAutor extends Component {
                         type="email"
                         name="email"
                         value={this.state.email}
-                        onChange={this.setEmail} />
+                        onChange={this.setCampo.bind('event', 'email')} />
 
                     <InputCustom
                         label="Senha"
@@ -86,7 +78,7 @@ class FormAutor extends Component {
                         type="password"
                         name="senha"
                         value={this.state.senha}
-                        onChange={this.setSenha} />
+                        onChange={this.setCampo.bind('event', 'senha')} />
 
                     <ButtomCustom
                         type="submit"

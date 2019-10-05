@@ -4,12 +4,14 @@ import PubSub from 'pubsub-js';
 import TratarErros from '../help/TratarErros';
 import InputCustom from '../components/Inputs';
 import ButtomCustom from '../components/Buttoms';
+import SelectCustom from '../components/Selects';
 
 class FormLivro extends Component {
 
     constructor() {
 		super();
-		this.state = { titulo: '', preco: 0, autorId: 0 };
+        this.state = { titulo: '', preco: '', autorId: 0 };
+        this.setTitulo = this.setTitulo.bind(this);
     }
 
     enviaForm = (evento) => {
@@ -46,7 +48,7 @@ class FormLivro extends Component {
 		.catch(err => {console.log(err)});
 	}
 
-	setTitulo = (evento) => this.setState({ titulo: evento.target.value});
+	setTitulo(evento) { this.setState({ titulo: evento.target.value}); }
 	setPreco = (evento) => this.setState({ preco: evento.target.value});
 	setAutorId = (evento) => this.setState({ autorId: evento.target.value});
     
@@ -70,13 +72,13 @@ class FormLivro extends Component {
                         value={this.state.preco}
                         onChange={this.setPreco} />
 
-                    <InputCustom
+                    <SelectCustom
                         label="Autor"
                         id="autor"
-                        type="number"
                         name="autor"
                         value={this.state.autorId}
-                        onChange={this.setAutorId} />
+                        onChange={this.setAutorId}
+                        autores={this.props.autores} />
 
                     <ButtomCustom
                         type="submit"
@@ -128,7 +130,7 @@ export default class LivroBox extends Component {
 
     constructor() {
         super();
-        this.state = { livros: [] };
+        this.state = { livros: [], autores: [] };
     }
 
     componentDidMount() {
@@ -149,6 +151,23 @@ export default class LivroBox extends Component {
 
         PubSub.subscribe('atualiza-lista-livros',
             (topico, novaLista) => this.setState({livros: novaLista}) );
+
+
+
+        fetch('http://localhost:3003/autores')
+            .then(resp => {
+                if(resp.status != 200) {
+                    console.log(resp);
+                    return;
+                }
+                else {
+                    resp.json()
+                    .then( data => {
+                        this.setState({ autores: data });
+                    })
+                }
+            })
+            .catch(err => {console.log(err)});
     }
 
     render() {
@@ -159,7 +178,7 @@ export default class LivroBox extends Component {
                 </div>
 
                 <div className="content" id="content">
-                    <FormLivro/>
+                    <FormLivro autores={this.state.autores}/>
 
                     <TabelaLivro livros={this.state.livros}/>
                 </div>
