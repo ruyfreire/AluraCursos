@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import usuario from '../imgs/usuario.jpg';
-import foto from '../imgs/foto.jpg';
-
 export default class Foto extends Component {
     render() {
         return (
