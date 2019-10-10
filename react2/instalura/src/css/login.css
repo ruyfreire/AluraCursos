@@ -19,3 +19,10 @@
     border-color: #3897f0;
     color: white;    
 }
+
+.msg-error {
+    display: block;
+    text-align: center;
+    font-size: .8em;
+    color: #fd0000;
+}

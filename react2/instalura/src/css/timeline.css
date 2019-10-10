@@ -14,7 +14,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 7vh;
+  height: 50px;
   border-bottom: 2px solid #aaa;
   position: fixed;
   top: 0;
@@ -79,6 +79,28 @@ body {
 
 .header-nav-item a:hover{
   color: #5ad4c9;
+}
+
+.btn-sair {
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 10px;
+  background-color: #069;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 15px;
+  text-align: center;
+  line-height: 30px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.btn-sair:hover,
+.btn-sair:focus {
+  background-color: #045177;
 }
 
 /*******/
