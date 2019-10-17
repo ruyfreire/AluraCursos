@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export default class Login extends Component {
 
-    constructor() {
-        super();
-        this.state = {msg: '', redirect: false};
+    constructor(props) {
+        super(props);
+        if(this.props.location.state)
+            this.state = {msg: this.props.location.state.msg, redirect: false};
+        else
+            this.state = {msg: '', redirect: false};
     }
 
     enviar(event) {
@@ -33,8 +36,9 @@ export default class Login extends Component {
     }
 
     redirecionar = () => {
-        if(this.state.redirect)
-        return <Redirect to="/timeline"/>
+        if(this.state.redirect) {
+            return <Redirect to="/timeline"/>
+        }
     }
 
     render() {
