@@ -16,8 +16,8 @@ const rotas = () => {
     return (
         <Router>
             <Route exact path="/" component={Login}/>
-            <Route exact path="/timeline/:login?" render={autenticado}/>
-            <Route exact path="/logout" component={Logout}/>
+            <Route path="/timeline/:login?" render={autenticado}/>
+            <Route path="/logout" component={Logout}/>
         </Router>
     );
 }
