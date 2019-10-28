@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
-import pubsub from 'pubsub-js';
+
 
 import FotoItem from './Foto';
 
-export default class Timeline extends Component {
 
+export default class Timeline extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {fotos: []};
@@ -13,81 +14,22 @@ export default class Timeline extends Component {
     }
 
     componentWillMount() {
-        pubsub.subscribe('pesquisa', (topico, fotos) => {
-            this.setState({fotos});
-        })
-
-        pubsub.subscribe('atualiza-likers', (topico, novosLikers) => {
-            const fotoAchada = this.state.fotos.find(foto => foto.id === novosLikers.fotoId);
-            const liked = fotoAchada.likers.find(liker => liker.login === novosLikers.likers.login);
-            if(liked === undefined) {
-                fotoAchada.likers.push(novosLikers.likers);
-            }
-            else {
-                const likersAtt = fotoAchada.likers.filter(liker => liker.login !== novosLikers.likers.login);
-                fotoAchada.likers = likersAtt;
-            }
-            fotoAchada.likeada = !fotoAchada.likeada;
-            this.setState({fotos: this.state.fotos});
-        })
-
-        pubsub.subscribe('atualiza-comentarios', (topico, novosComentarios) => {
-            const fotoAchada = this.state.fotos.find(foto => foto.id === novosComentarios.fotoId);
-            fotoAchada.comentarios.push(novosComentarios.comentarios);
-            this.setState({fotos: this.state.fotos});
-        })
+        this.props.store.subscribe((fotos) => {
+            this.setState({fotos})
+        });
     }
 
     carregaFotos() {
-        let url = '';
-        if(this.login !== undefined)
-            url = `https://instalura-api.herokuapp.com/api/public/fotos/${this.login}`;
-        else
-            url = `https://instalura-api.herokuapp.com/api/fotos?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`;
-
-        fetch(url)
-            .then(resp => resp.json())
-            .then(fotos => this.setState({fotos}) )
+        this.props.store.carregaFotos(this.login);
     }
 
     likear = (fotoId) => {
-        fetch(`https://instalura-api.herokuapp.com/api/fotos/${fotoId}/like?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`, { method: 'POST' })
-            .then(resp => {
-                if(resp.ok) {
-                    return resp.json();
-                }
-                else {
-                    throw new Error('Não foi possível dar like!');
-                }
-            })
-            .then(likers => {
-                pubsub.publish('atualiza-likers', {fotoId, likers});
-            })
-            .catch(error => {console.log(error)});
+        this.props.store.likear(fotoId);
     }
 
-    comentar = async (fotoId, comentario) => {
-        fetch(`https://instalura-api.herokuapp.com/api/fotos/${fotoId}/comment?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`,
-        {
-            method: 'POST',
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify({texto: comentario.value})
-        })
-        .then(resp => {
-            if(resp.ok) {
-                return resp.json();
-            }
-            else {
-                throw new Error('Não foi possível comentar na foto!');
-            }
-        })
-        .then(comentarios => {
-            comentario.value = '';
-            pubsub.publish('atualiza-comentarios', {fotoId, comentarios});
-        })
-        .catch(error => { console.log(error) });
+    comentar = (fotoId, comentario) => {
+        this.props.store.comentar(fotoId, comentario);
     }
-
 
     componentDidMount() {
         this.carregaFotos();
