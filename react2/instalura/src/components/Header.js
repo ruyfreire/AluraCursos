@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import TimelineAPI from '../rules/TimelineAPI';
+
 export default class Header extends Component {
 
     pesquisar = (event) => {
         event.preventDefault();
-        this.props.store.pesquisar(this.inputPesquisa);
+        if(this.inputPesquisa.value !== '') {
+            this.props.store.dispatch(TimelineAPI.pesquisar(this.inputPesquisa));
+        }
     }
 
     render() {
