@@ -5,6 +5,17 @@ import TimelineAPI from '../rules/TimelineAPI';
 
 export default class Header extends Component {
 
+    constructor() {
+        super();
+        this.state = {msg: ''};
+    }
+    
+    componentDidMount() {
+        this.props.store.subscribe(() => {
+            this.setState({msg: this.props.store.getState().headerReduces});
+        });
+    }
+
     pesquisar = (event) => {
         event.preventDefault();
         if(this.inputPesquisa.value !== '') {
@@ -22,8 +33,8 @@ export default class Header extends Component {
             <form className="header-busca" onSubmit={this.pesquisar}>
                 <input type="text" name="search" placeholder="Pesquisa" className="header-busca-campo" ref={input => this.inputPesquisa = input}/>
                 <input type="submit" value="Buscar" className="header-busca-submit" />
+                <span className="alert-pesquisa">{this.state.msg}</span>
             </form>
-
 
             <nav>                
                 <ul className="header-nav">

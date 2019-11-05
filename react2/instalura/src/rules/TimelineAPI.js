@@ -1,3 +1,5 @@
+import { listagem, like, comenta, notifica } from '../actions/actionCreator';
+
 export default class TimelineStore {
 
     static carregaFotos(login) {
@@ -13,7 +15,7 @@ export default class TimelineStore {
             fetch(url)
                 .then(resp => resp.json())
                 .then(fotos => {
-                    dispatch({ type: 'LISTAGEM', fotos });
+                    dispatch(listagem(fotos));
                     return fotos;
                 });
         }
@@ -31,7 +33,7 @@ export default class TimelineStore {
                     }
                 })
                 .then(novosLikers => {
-                    dispatch({ type: 'LIKE', fotoId, novosLikers });
+                    dispatch(like(fotoId, novosLikers));
                     return novosLikers;
                 })
                 .catch(error => {console.log(error)});
@@ -55,7 +57,7 @@ export default class TimelineStore {
                 }
             })
             .then(comentarios => {
-                dispatch({ type:'COMENTAR', fotoId, comentario, comentarios });
+                dispatch(comenta(fotoId, comentarios));
                 comentario.value = '';
                 return comentarios;
             })
@@ -68,9 +70,17 @@ export default class TimelineStore {
             fetch(`https://instalura-api.herokuapp.com/api/public/fotos/${pesquisa.value}`)
                 .then(resp => resp.json())
                 .then(fotos => {
-                    dispatch({ type:'PESQUISA', pesquisa, fotos });
-                    pesquisa.value = '';
-                    return fotos;
+                    if(fotos.length === 0) {
+                        dispatch(notifica('Usuário não encontrado!'));
+                        setTimeout(() => {
+                            dispatch(notifica(''));
+                        }, 2000);
+                    }
+                    else {
+                        dispatch({ type:'PESQUISA', fotos });
+                        pesquisa.value = '';
+                        return fotos;
+                    }
                 })
                 .catch(erro => { console.log('usuário não encontrado!')});
         }

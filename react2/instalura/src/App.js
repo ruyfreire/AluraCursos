@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Timeline from './components/Timeline';
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import timelineReduces from './reducers/timeline';
+import headerReduces from './reducers/header';
 
-const store = createStore(timelineReduces, applyMiddleware(thunkMiddleware) );
+const reducers = combineReducers({timelineReduces, headerReduces});
+const store = createStore(reducers, applyMiddleware(thunkMiddleware) );
 
 class App extends Component {
 
