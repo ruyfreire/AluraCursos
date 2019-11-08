@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import TimelineAPI from '../rules/TimelineAPI';
 
-export default class Header extends Component {
+class Header extends Component {
 
     constructor() {
         super();
         this.state = {msg: ''};
     }
     
-    componentDidMount() {
-        this.props.store.subscribe(() => {
-            this.setState({msg: this.props.store.getState().headerReduces});
-        });
-    }
+    // componentDidMount() {
+    //     this.props.store.subscribe(() => {
+    //         this.setState({msg: this.props.store.getState().headerReduces});
+    //     });
+    // }
 
     pesquisar = (event) => {
         event.preventDefault();
-        if(this.inputPesquisa.value !== '') {
-            this.props.store.dispatch(TimelineAPI.pesquisar(this.inputPesquisa));
-        }
+        this.props.pesquisar(this.inputPesquisa);
     }
 
     render() {
@@ -55,3 +54,22 @@ export default class Header extends Component {
         );
     }
 }
+
+
+const mapStateToProps = state => {
+    return { msg: state.headerReduces }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        pesquisar: (input) => {
+            if(input.value !== '') {
+                dispatch(TimelineAPI.pesquisar(input));
+            }
+        }
+    }
+}
+
+const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export default HeaderContainer;
