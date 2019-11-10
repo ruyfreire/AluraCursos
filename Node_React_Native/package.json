@@ -1,18 +1,24 @@
 {
-  "name": "node_react_native",
-  "version": "1.0.0",
-  "description": "Estudando node, react e react native",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js"
-  },
-  "author": "Ruy Freire",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^1.19.4"
-  },
-  "dependencies": {
-    "express": "^4.17.1",
-    "nunjucks": "^3.2.0"
-  }
+	"name": "node_react_native",
+	"version": "1.0.0",
+	"description": "Estudando node, react e react native",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon src/index.js"
+	},
+	"author": "Ruy Freire",
+	"license": "ISC",
+	"devDependencies": {
+		"eslint": "^6.6.0",
+		"eslint-config-standard": "^14.1.0",
+		"eslint-plugin-import": "^2.18.2",
+		"eslint-plugin-node": "^10.0.0",
+		"eslint-plugin-promise": "^4.2.1",
+		"eslint-plugin-standard": "^4.0.1",
+		"nodemon": "^1.19.4"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"nunjucks": "^3.2.0"
+	}
 }
